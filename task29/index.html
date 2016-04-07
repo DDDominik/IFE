@@ -1,0 +1,95 @@
+<!-- 
+百度前端技术学院task29
+庄娴
+2016/04/06 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task-29</title>
+    <style>
+        body{
+            font-size: 20px;
+            font-family: 'Microsoft yahei';
+        }
+        #box{
+            position: absolute;
+            right: 0;
+            left: 0; 
+            top: 160px;           
+            width: 440px;  
+            margin: auto;
+        }
+        .name{
+            border: 2px solid #CDCDCD;
+            height: 34px;
+            font-size: 20px;
+            border-radius: 4px;
+            outline: none;
+            margin-left: 34px;
+            margin-right: 8px;
+        }
+        .sub{
+            width: 60px;
+            height: 34px;
+            padding: 3px 0px;
+            font-size: 20px;
+            color: white;
+            background-color: #2F79BA;
+            border: 0px;
+            border-radius: 4px;
+        }
+        .msg{
+            font-size: 14px;
+            color: #AAA;
+            position: relative;
+            left: 74px;   
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <label><span>名称</span><input type="input" class="name"></label>
+        <input type="submit" value="验证" class="sub">
+        <p class="msg">必填，长度为4~16个字符</p>
+    </div>
+    <script>
+        (function(){
+            //获取dom元素
+            var name = document.querySelector(".name"),
+                msg = document.querySelector(".msg"),
+                sub = document.querySelector(".sub");
+                
+            //计算输入名字的长度
+            function check(str){
+                var len = str.length;
+                for(var i = 0; i < len; i ++){
+                    if(/[\u4e00-\u9fa5]/.test(str[i]))
+                        count += 2;
+                    else if(/[\u0000-\u00FF]/.test(str[i]))
+                        count ++;
+                    else return false;
+                }
+            }
+            //判断，更改颜色，提示句
+            sub.addEventListener("click",function(){
+                count = 0;
+                check(name.value);
+                if(count >= 4 && count <= 16){
+                    msg.innerHTML = "名称格式正确";
+                    msg.style.color = "#7BCA68";
+                    console.log(name.style);
+                    console.log(msg.style);
+                }else if(count === 0){
+                    msg.innerHTML = "姓名不能为空";
+                    msg.style.color = "#E71D29";
+                }else{
+                    msg.innerHTML = "必填，长度为4~16个字符";
+                    msg.style.color = "#AAA";
+                }
+            })
+        })()
+    </script>
+</body>
+</html>
